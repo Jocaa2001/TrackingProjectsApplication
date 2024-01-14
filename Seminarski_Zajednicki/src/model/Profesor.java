@@ -19,14 +19,16 @@ public class Profesor implements ApstraktniDomenskiObjekat {
     private String prezime;
     private Zvanje zvanje;
     private String password;
+    private String username;
     
     
-    public Profesor(int idprofesora, String ime, String prezime, Zvanje zvanje,String password) {
+    public Profesor(int idprofesora, String ime, String prezime, Zvanje zvanje,String password, String username) {
         this.idprofesora = idprofesora;
         this.ime = ime;
         this.prezime = prezime;
         this.zvanje = zvanje;
         this.password = password;
+        this.username = username;
     }
 
     public Profesor() {
@@ -52,6 +54,16 @@ public class Profesor implements ApstraktniDomenskiObjekat {
         return prezime;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    
+    
     public void setPrezime(String prezime) {
         this.prezime = prezime;
     }
@@ -87,13 +99,14 @@ public class Profesor implements ApstraktniDomenskiObjekat {
         List<ApstraktniDomenskiObjekat> lista = new ArrayList<>();
         while(rs.next()){
             int id = rs.getInt("profesor.IDprofesor");
-            String ime = rs.getString("profesor.ime");
-            String prezime = rs.getString("profesor.prezime");
-            String zvanje = rs.getString("profesor.zvanje");
-            Zvanje z = Zvanje.valueOf(zvanje);
-            String password = rs.getString("profesor.password");
+            String i = rs.getString("profesor.ime");
+            String prez = rs.getString("profesor.prezime");
+            String z = rs.getString("profesor.zvanje");
+            Zvanje zv = Zvanje.valueOf(z);
+            String pass = rs.getString("profesor.password");
+            String u = rs.getString("profesor.username");
             
-            Profesor p = new Profesor(idprofesora, ime, prezime, z, password);
+            Profesor p = new Profesor(id, i, prez, zv, pass,u);
             
             lista.add(p);
             
@@ -104,12 +117,12 @@ public class Profesor implements ApstraktniDomenskiObjekat {
 
     @Override
     public String vratiKoloneZaUbacivanje() {
-        return "ime,prezime,zvanje,password";
+        return "ime,prezime,zvanje,password, username";
     }
 
     @Override
     public String vratiVrednostiZaUbacivanje() {
-        return String.format("('%s', '%s', '%s', '%s')", ime, prezime, String.valueOf(zvanje), password);
+        return String.format("('%s', '%s', '%s', '%s', '%s')", ime, prezime, String.valueOf(zvanje), password, username);
     }
 
     @Override
@@ -124,7 +137,7 @@ public class Profesor implements ApstraktniDomenskiObjekat {
 
     @Override
     public String vratiVrednostZaIzmenu() {
-        return String.format("ime = '%s', prezime = '%s',zvanje = '%s',password = '%s'", ime, prezime, String.valueOf(zvanje), password);
+        return String.format("ime = '%s', prezime = '%s',zvanje = '%s',password = '%s', username = '%s'", ime, prezime, String.valueOf(zvanje), password,username);
     }
     
     
