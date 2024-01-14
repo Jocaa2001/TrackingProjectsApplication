@@ -16,13 +16,15 @@ import niti.ObradaKlijentskihZahteva;
  * @author Win 10
  */
 public class Server {
-    
+    boolean kraj = false;
+    ServerSocket ss;
     public void pokreniServer(){
         try {
-            ServerSocket ss = new ServerSocket(9000);
-            while(true){
-                Socket s = ss.accept();
+            ss = new ServerSocket(9000);
+            while(!kraj){
                 
+                Socket s = ss.accept();
+                System.out.println("server je pokrenut");
                 ObradaKlijentskihZahteva okz = new ObradaKlijentskihZahteva(s);
                 okz.start();
                 
@@ -31,5 +33,13 @@ public class Server {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+    public void zaustavi(){
+        kraj = true;
+        try {
+            
+            ss.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
