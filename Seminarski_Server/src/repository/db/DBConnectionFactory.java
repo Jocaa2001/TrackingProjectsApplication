@@ -17,7 +17,7 @@ import konfiguracija.Konfiguracija;
  */
 public class DBConnectionFactory {
     
-    private static DBConnectionFactory instance;
+    public static DBConnectionFactory instance;
     private Connection connection;
     private DBConnectionFactory(){
         

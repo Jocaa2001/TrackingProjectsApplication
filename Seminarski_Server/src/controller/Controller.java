@@ -4,14 +4,20 @@
  */
 package controller;
 
+import model.Profesor;
+import repository.db.DBConnectionFactory;
+import repository.db.impl.DbRepositoryGeneric;
+
 /**
  *
  * @author Win 10
  */
 public class Controller {
     public static Controller instance;
-    
+    public static Profesor ulogoani;
+    private DbRepositoryGeneric dbr;
     private Controller() {
+        
     }
 
     public static Controller getInstance() {
@@ -19,7 +25,7 @@ public class Controller {
             instance = new Controller();
         return instance;
     }
-    
-    
+
+      
     
 }
