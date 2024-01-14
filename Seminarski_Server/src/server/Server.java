@@ -15,10 +15,12 @@ import niti.ObradaKlijentskihZahteva;
  *
  * @author Win 10
  */
-public class Server {
+public class Server extends Thread {
     boolean kraj = false;
     ServerSocket ss;
-    public void pokreniServer(){
+
+    @Override
+    public void run() {
         try {
             ss = new ServerSocket(9000);
             while(!kraj){
@@ -33,6 +35,10 @@ public class Server {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    
+    
+   
     public void zaustavi(){
         kraj = true;
         try {

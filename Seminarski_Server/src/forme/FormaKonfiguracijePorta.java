@@ -19,6 +19,7 @@ public class FormaKonfiguracijePorta extends javax.swing.JDialog {
     public FormaKonfiguracijePorta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        jTextFieldPort.setText(Konfiguracija.getInstance().getProperty("port"));
     }
 
     /**

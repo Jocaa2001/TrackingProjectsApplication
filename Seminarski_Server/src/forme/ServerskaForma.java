@@ -99,7 +99,7 @@ public class ServerskaForma extends javax.swing.JFrame {
         if(!pokrenut){
             pokrenut = true;
             jButtonServer.setText("Zaustavi Server");
-            server.pokreniServer();
+            server.start();
         }else{
             pokrenut = false;
             jButtonServer.setText("Pokreni Server");

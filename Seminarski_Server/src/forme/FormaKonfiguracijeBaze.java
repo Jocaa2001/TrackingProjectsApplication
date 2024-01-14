@@ -19,6 +19,7 @@ public class FormaKonfiguracijeBaze extends javax.swing.JDialog {
     public FormaKonfiguracijeBaze(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        popuniTextField();
     }
 
     /**
@@ -127,4 +128,10 @@ public class FormaKonfiguracijeBaze extends javax.swing.JDialog {
     private javax.swing.JTextField jTextFieldURL;
     private javax.swing.JTextField jTextFieldUsername;
     // End of variables declaration//GEN-END:variables
+
+    private void popuniTextField() {
+        jTextFieldURL.setText(Konfiguracija.getInstance().getProperty("url"));
+        jTextFieldUsername.setText(Konfiguracija.getInstance().getProperty("username"));
+        jPasswordField.setText(Konfiguracija.getInstance().getProperty("password"));
+    }
 }
