@@ -4,6 +4,9 @@
  */
 package forme;
 
+import javax.swing.JOptionPane;
+import konfiguracija.Konfiguracija;
+
 /**
  *
  * @author Win 10
@@ -44,6 +47,11 @@ public class FormaKonfiguracijeBaze extends javax.swing.JDialog {
         jLabel3.setText("Password");
 
         jButton1.setText("Sacuvaj");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -88,47 +96,27 @@ public class FormaKonfiguracijeBaze extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormaKonfiguracijeBaze.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormaKonfiguracijeBaze.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormaKonfiguracijeBaze.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormaKonfiguracijeBaze.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String url = jTextFieldURL.getText().trim();
+        String username = jTextFieldUsername.getText().trim();
+        String password = String.valueOf(jPasswordField.getPassword()).trim();
+        try{
+        Konfiguracija.getInstance().setProperty("url", url);
+        Konfiguracija.getInstance().setProperty("username", username);
+        Konfiguracija.getInstance().setProperty("password", password);
+        
+        Konfiguracija.getInstance().sacuvajIzmene();
+        JOptionPane.showMessageDialog(this, "Uspesno ste sacuvali parametre");
+        this.dispose();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Greska,parametri nisu ispravni");
+            e.printStackTrace();
         }
-        //</editor-fold>
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                FormaKonfiguracijeBaze dialog = new FormaKonfiguracijeBaze(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
