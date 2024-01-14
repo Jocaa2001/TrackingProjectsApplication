@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface Repository<T> {
     
-    List<T> pretraga(T param) throws Exception;
+    List<T> pretraga(T param,String uslov) throws Exception;
     void dodaj(T param) throws Exception;
     void izmeni(T param) throws Exception;
     void izbrisi (T param) throws Exception;
