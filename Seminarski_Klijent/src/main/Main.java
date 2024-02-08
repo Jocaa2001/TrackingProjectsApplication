@@ -5,6 +5,10 @@
 package main;
 import koordinator.Koordinator;
 import com.sun.xml.internal.bind.v2.runtime.Coordinator;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -13,6 +17,5 @@ import com.sun.xml.internal.bind.v2.runtime.Coordinator;
 public class Main {
     public static void main(String[] args) {
         Koordinator.getInstance().otvoriLoginFormu();
-      
     }
 }

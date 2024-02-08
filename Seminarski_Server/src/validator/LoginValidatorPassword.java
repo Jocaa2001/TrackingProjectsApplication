@@ -14,8 +14,14 @@ public class LoginValidatorPassword {
 
     public LoginValidatorPassword() {
     }
+
+    public LoginValidatorPassword(String password) {
+        this.password = password;
+    }
     
-    private boolean Validacija(){
+    
+    
+    public boolean Validacija(){
         return password.matches("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");
         //minimum 8 karaktera
         //jedno veliko slovo

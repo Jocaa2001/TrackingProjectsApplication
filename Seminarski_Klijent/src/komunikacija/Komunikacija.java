@@ -60,7 +60,11 @@ public class Komunikacija {
 
     public boolean validate(String pass) {
         Zahtev z = new Zahtev(Operacija.validate, pass);
-        return false;
+        posiljalac.posalji(z);
+        
+        Odgovor odg = (Odgovor) primalac.primi();
+        boolean ispravan = (boolean) odg.getObject();
+        return ispravan;
     }
 
     

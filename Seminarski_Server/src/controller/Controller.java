@@ -4,18 +4,20 @@
  */
 package controller;
 
+import hashing.PasswordHasher;
 import model.Profesor;
 import operacija.login.LoginOperacija;
 import repository.db.DBConnectionFactory;
 import repository.db.impl.DbRepositoryGeneric;
+import validator.LoginValidatorPassword;
 
 /**
  *
  * @author Win 10
  */
 public class Controller {
-    public static Controller instance;
-    public static Profesor ulogoani;
+    private static Controller instance;
+    private static Profesor ulogovani;
     private DbRepositoryGeneric dbr;
     private Controller() {
         
@@ -29,9 +31,14 @@ public class Controller {
 
     public Profesor login(Profesor p) throws Exception {
         LoginOperacija lo = new LoginOperacija();
+        p.setPassword(new PasswordHasher(p.getPassword()).hash());
+        System.out.println(p.getPassword() + "ovo je iz login");
         lo.izvrsi(p, null);
-        System.out.println("klasa kontroler "+ p);
         return lo.getProf();
+    }
+
+    public boolean validacija(String pass) {
+        return new LoginValidatorPassword(pass).Validacija();
     }
 
       

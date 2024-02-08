@@ -23,7 +23,6 @@ public abstract class ApstraktnaGenerickaOperacija {
     
     public final void izvrsi(Object objekat, String kljuc) throws Exception{
         try{
-       
             preduslovi(objekat);
             zapocniTransakciju();
             izvrsiOperaciju(objekat,kljuc);

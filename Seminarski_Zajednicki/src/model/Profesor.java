@@ -148,11 +148,7 @@ public class Profesor implements ApstraktniDomenskiObjekat {
         return String.format("ime = '%s', prezime = '%s',zvanje = '%s',password = '%s', username = '%s'", ime, prezime, String.valueOf(zvanje), password,username);
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        return hash;
-    }
+    
 
     @Override
     public boolean equals(Object obj) {

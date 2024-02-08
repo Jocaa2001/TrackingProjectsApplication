@@ -27,10 +27,12 @@ public class LoginOperacija extends ApstraktnaGenerickaOperacija {
     @Override
     protected void izvrsiOperaciju (Object objekat, String kljuc)throws Exception {
         List<Profesor> sviProfesori = broker.pretraga((Profesor) objekat, null);
-        System.out.println("Klasa loginSO" + sviProfesori);
+        
         
         for (Profesor p : sviProfesori) {
+             System.out.println(p.getPassword());
             if(p.equals((Profesor)objekat)){
+               
                 prof = p;
                 return;
             }

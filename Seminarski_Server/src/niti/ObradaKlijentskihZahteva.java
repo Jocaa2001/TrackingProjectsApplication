@@ -44,8 +44,13 @@ public class ObradaKlijentskihZahteva extends Thread {
                         p = Controller.getInstance().login(p);
                         odgovor.setObject(p);
                         break;
+                    case validate: 
+                        String pass = (String) zahtev.getObject();
+                        boolean ispravan = Controller.getInstance().validacija(pass);
+                        odgovor.setObject(ispravan);
+                        break;
                     default:
-                        System.out.println("ok");
+                        System.out.println("Greska");
                 }
                 posiljalac.posalji(odgovor);
             } catch (Exception ex) {
