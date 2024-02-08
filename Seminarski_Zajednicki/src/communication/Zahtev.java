@@ -4,11 +4,13 @@
  */
 package communication;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Win 10
  */
-public class Zahtev {
+public class Zahtev implements Serializable {
     
     private Operacija operation;
     private Object object;

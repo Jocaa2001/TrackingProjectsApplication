@@ -12,4 +12,6 @@ import java.io.Serializable;
  */
 public enum Operacija implements Serializable {
     
+     login, validate
+    
 }

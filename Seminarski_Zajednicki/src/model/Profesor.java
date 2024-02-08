@@ -7,6 +7,7 @@ package model;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -30,6 +31,13 @@ public class Profesor implements ApstraktniDomenskiObjekat {
         this.password = password;
         this.username = username;
     }
+
+    public Profesor(String password, String username) {
+        this.password = password;
+        this.username = username;
+    }
+    
+    
 
     public Profesor() {
     }
@@ -138,6 +146,30 @@ public class Profesor implements ApstraktniDomenskiObjekat {
     @Override
     public String vratiVrednostZaIzmenu() {
         return String.format("ime = '%s', prezime = '%s',zvanje = '%s',password = '%s', username = '%s'", ime, prezime, String.valueOf(zvanje), password,username);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Profesor other = (Profesor) obj;
+        if (!Objects.equals(this.password, other.password)) {
+            return false;
+        }
+        return Objects.equals(this.username, other.username);
     }
     
     

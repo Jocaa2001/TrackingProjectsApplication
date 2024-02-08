@@ -5,6 +5,7 @@
 package controller;
 
 import model.Profesor;
+import operacija.login.LoginOperacija;
 import repository.db.DBConnectionFactory;
 import repository.db.impl.DbRepositoryGeneric;
 
@@ -24,6 +25,13 @@ public class Controller {
         if(instance == null)
             instance = new Controller();
         return instance;
+    }
+
+    public Profesor login(Profesor p) throws Exception {
+        LoginOperacija lo = new LoginOperacija();
+        lo.izvrsi(p, null);
+        System.out.println("klasa kontroler "+ p);
+        return lo.getProf();
     }
 
       

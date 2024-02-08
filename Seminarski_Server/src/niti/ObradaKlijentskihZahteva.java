@@ -8,7 +8,11 @@ import communication.Odgovor;
 import communication.Posiljalac;
 import communication.Primalac;
 import communication.Zahtev;
+import controller.Controller;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Profesor;
 
 /**
  *
@@ -31,16 +35,22 @@ public class ObradaKlijentskihZahteva extends Thread {
     @Override
     public void run() {
         while(true){
-            Zahtev zahtev = (Zahtev) primalac.primi();
-            Odgovor odgovor = new Odgovor();
-            switch (zahtev.getOperation()) {
-               // case val:
-                    
-                   // break;
-                default:
-                    System.out.println("ok");
+            try {
+                Zahtev zahtev = (Zahtev) primalac.primi();
+                Odgovor odgovor = new Odgovor();
+                switch (zahtev.getOperation()) {
+                    case login:
+                        Profesor p = (Profesor) zahtev.getObject();
+                        p = Controller.getInstance().login(p);
+                        odgovor.setObject(p);
+                        break;
+                    default:
+                        System.out.println("ok");
+                }
+                posiljalac.posalji(odgovor);
+            } catch (Exception ex) {
+                Logger.getLogger(ObradaKlijentskihZahteva.class.getName()).log(Level.SEVERE, null, ex);
             }
-             posiljalac.posalji(odgovor);
         }
        
     }

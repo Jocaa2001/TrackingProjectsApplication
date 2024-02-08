@@ -6,6 +6,7 @@ package communication;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,7 +15,7 @@ import java.util.logging.Logger;
  *
  * @author Win 10
  */
-public class Posiljalac {
+public class Posiljalac implements Serializable {
     
     private Socket socket;
 
