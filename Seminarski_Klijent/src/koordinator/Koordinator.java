@@ -4,8 +4,18 @@
  */
 package koordinator;
 
+import controllers.DodajStudentaController;
+import controllers.GlavnaFormaController;
 import controllers.LoginController;
+import controllers.PrikazPredmetaController;
+import controllers.PrikazStudenataController;
+import forme.DodajStudentaForma;
+import forme.GlavnaForma;
 import forme.LoginForma;
+import forme.PrikazPredmetaForma;
+import forme.PrikazStudenataForma;
+import mod.ModPredmet;
+import model.Profesor;
 
 /**
  *
@@ -14,7 +24,11 @@ import forme.LoginForma;
 public class Koordinator {
     private static Koordinator instance;
     private LoginController lc;
-    
+    private GlavnaFormaController gfc;
+    private PrikazPredmetaController ppc;
+    private PrikazStudenataController psc;
+    private DodajStudentaController dsc;
+    private Profesor ulogovani;
     private Koordinator() {
         
     }
@@ -29,4 +43,41 @@ public static Koordinator getInstance() {
         lc = new LoginController(new LoginForma());
         lc.otvoriFormu();
     }
+
+    public void otvoriGlavnuFormu() {
+        gfc = new GlavnaFormaController(new GlavnaForma());
+        gfc.otvoriformu();
+    }
+
+    public Profesor getUlogovani() {
+        return ulogovani;
+    }
+
+    public void otvoriPrikazStudentaFormu() {
+        psc = new PrikazStudenataController(new PrikazStudenataForma());
+        psc.otvoriFormu();
+    }
+    
+    public void setUlogovani(Profesor ulogovani) {
+        this.ulogovani = ulogovani;
+    }
+
+    public void otvoriPrikazPredmetaFormu(ModPredmet m) {
+        ppc = new PrikazPredmetaController(new PrikazPredmetaForma());
+        if(m.equals(m.pronadji))
+            ppc.sakrijDugmeObrisi();
+        ppc.otvoriFormu();
+    }
+
+    public void otvoriDodajStudentaFormu() {
+        dsc = new DodajStudentaController(new DodajStudentaForma());
+        dsc.otvoriFormu();
+    }
+
+   
+
+    
+    
+    
+    
 }

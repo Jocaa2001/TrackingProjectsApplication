@@ -94,7 +94,7 @@ public class Student implements ApstraktniDomenskiObjekat {
         while(rs.next()){
             int id = rs.getInt("student.IDstudent");
             String ime = rs.getString("student.ime");
-            String prezime = rs.getString("studetn.prezime");
+            String prezime = rs.getString("student.prezime");
             int brIndeksa = rs.getInt("student.brojIndeksa");
             Student s = new Student(id,ime,prezime,brIndeksa);
             lista.add(s);

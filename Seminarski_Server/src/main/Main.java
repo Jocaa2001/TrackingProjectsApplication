@@ -4,6 +4,8 @@
  */
 package main;
 
+import controller.klijent.ControllerLogin;
+import controller.Server.ControllerServer;
 import forme.ServerskaForma;
 
 /**
@@ -12,6 +14,6 @@ import forme.ServerskaForma;
  */
 public class Main {
     public static void main(String[] args) {
-       new ServerskaForma().setVisible(true);
+        ControllerServer.getInstance(); 
     }
 }

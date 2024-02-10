@@ -11,9 +11,13 @@ import communication.Primalac;
 import communication.Zahtev;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Predmet;
 import model.Profesor;
+import model.Student;
 
 /**
  *
@@ -65,6 +69,54 @@ public class Komunikacija {
         Odgovor odg = (Odgovor) primalac.primi();
         boolean ispravan = (boolean) odg.getObject();
         return ispravan;
+    }
+
+    public List<Student> loadListStudent() {
+        Zahtev z = new Zahtev(Operacija.ucitaj_studente, null);
+        List <Student> studenti = new ArrayList<>();
+        posiljalac.posalji(z);
+        
+        
+        
+        Odgovor odg = (Odgovor) primalac.primi();
+        studenti = (List<Student>) odg.getObject();
+        return studenti;
+    }
+
+    public List<Predmet> loadListPredmet() {
+        Zahtev z = new Zahtev(Operacija.ucitaj_predmete, null);
+        List<Predmet> predmeti = new ArrayList<>();
+        posiljalac.posalji(z);
+        
+        
+        Odgovor odg = (Odgovor) primalac.primi();
+        predmeti = (List<Predmet>) odg.getObject();
+        return predmeti;
+    }
+
+    public void deletePredmet(Predmet p) throws Exception {
+        Zahtev z = new Zahtev(Operacija.obrisi_predmet, p);
+        posiljalac.posalji(z);
+        
+        Odgovor odg = (Odgovor) primalac.primi();
+        
+        if(odg.getObject() == null){
+            System.out.println("uspeh");
+        }else{
+            ((Exception) odg.getObject()).printStackTrace();
+            throw new Exception("greska");
+        }
+    }
+
+    public void dodajStudenta(Student s) {
+        Zahtev z = new Zahtev(Operacija.dodaj_studenta,s);
+        posiljalac.posalji(z);
+        Odgovor odg = (Odgovor) primalac.primi();
+        if(odg.getObject() == null){
+            System.out.println("Uspesno dodat student");
+        }else{
+            System.out.println("Greska, student nije dodat");
+        } 
     }
 
     

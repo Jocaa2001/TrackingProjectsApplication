@@ -8,11 +8,14 @@ import communication.Odgovor;
 import communication.Posiljalac;
 import communication.Primalac;
 import communication.Zahtev;
-import controller.Controller;
+import controller.klijent.ControllerLogin;
 import java.net.Socket;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Predmet;
 import model.Profesor;
+import model.Student;
 
 /**
  *
@@ -41,13 +44,36 @@ public class ObradaKlijentskihZahteva extends Thread {
                 switch (zahtev.getOperation()) {
                     case login:
                         Profesor p = (Profesor) zahtev.getObject();
-                        p = Controller.getInstance().login(p);
+                        p = ControllerLogin.getInstance().login(p);
                         odgovor.setObject(p);
                         break;
                     case validate: 
                         String pass = (String) zahtev.getObject();
-                        boolean ispravan = Controller.getInstance().validacija(pass);
+                        boolean ispravan = ControllerLogin.getInstance().validacija(pass);
                         odgovor.setObject(ispravan);
+                        break;
+                    case ucitaj_studente:
+                        List<Student> studenti = ControllerLogin.getInstance().ucitajStudente();
+                        odgovor.setObject(studenti);
+                        break;
+                    case ucitaj_predmete:
+                        List<Predmet> predmeti = ControllerLogin.getInstance().ucitajPredmete();
+                        odgovor.setObject(predmeti);
+                        break;
+                    case obrisi_predmet:
+                        try{
+                            Predmet pred = (Predmet) zahtev.getObject();
+                            
+                            ControllerLogin.getInstance().obrisiPredmet(pred);
+                            odgovor.setObject(null);
+                        }catch(Exception e){
+                            odgovor.setObject(e);
+                        }
+                        break;
+                    case dodaj_studenta:
+                        Student s = (Student) zahtev.getObject();
+                        ControllerLogin.getInstance().dodajStudenta(s);
+                        odgovor.setObject(null);
                         break;
                     default:
                         System.out.println("Greska");

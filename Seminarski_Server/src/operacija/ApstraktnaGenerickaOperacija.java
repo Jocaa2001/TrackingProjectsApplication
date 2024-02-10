@@ -31,11 +31,11 @@ public abstract class ApstraktnaGenerickaOperacija {
             ponistiTransakciju();
             throw e;
         }finally{
-            ugasiKonekciju();
+            //ugasiKonekciju();
         }
     }
 
-    protected abstract void preduslovi(Object objekat);
+    protected abstract void preduslovi(Object objekat)throws Exception;
     protected abstract void izvrsiOperaciju (Object objekat, String kljuc)throws Exception;
     
     private void zapocniTransakciju() throws Exception {

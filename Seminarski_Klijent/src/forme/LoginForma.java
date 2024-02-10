@@ -41,9 +41,18 @@ public class LoginForma extends javax.swing.JFrame {
 
         jLabel1.setText("Username");
 
+        jTextFieldUsername.setText("S");
+
         jLabel2.setText("Password");
 
         jButtonLogin.setText("Login");
+        jButtonLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLoginActionPerformed(evt);
+            }
+        });
+
+        jPasswordField.setText("Seminarski1!");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -79,6 +88,10 @@ public class LoginForma extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonLoginActionPerformed
 
     public JButton getjButtonLogin() {
         return jButtonLogin;

@@ -4,11 +4,13 @@
  */
 package controllers;
 
+import com.sun.xml.internal.bind.v2.runtime.Coordinator;
 import forme.LoginForma;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import komunikacija.Komunikacija;
+import koordinator.Koordinator;
 import model.Profesor;
 
 /**
@@ -34,22 +36,23 @@ public class LoginController {
                             + "- Bar jedan specijalni karakter\n - Minimum jedan broj" );
                     return;
                 }
-                prijava();
+                login();
             }
 
-            private void prijava() {
+            private void login() {
                  String username = lf.getjTextFieldUsername().getText().trim();
                  String pass = String.valueOf(lf.getjPasswordField().getPassword());
                  
                  Komunikacija.getInstance().konekcija();
                  Profesor ulogovani = Komunikacija.getInstance().login(username,pass);
                  if(ulogovani == null){
-                     JOptionPane.showMessageDialog(lf, "Neuspesna prijava na sistem","Neuspeh", JOptionPane.INFORMATION_MESSAGE);
-                     lf.dispose();
-                 }else{
-                     //glavna forma
-                      JOptionPane.showMessageDialog(lf, "Uspesna prijava na sistem","Uspeh", JOptionPane.INFORMATION_MESSAGE);
+                     JOptionPane.showMessageDialog(lf, "Систем не може да нађе професора по задатој вредности","Неуспех", JOptionPane.INFORMATION_MESSAGE);
                      
+                 }else{
+                      Koordinator.getInstance().setUlogovani(ulogovani);
+                      JOptionPane.showMessageDialog(lf, "Успешно сте се пријавили на систем","Успех", JOptionPane.INFORMATION_MESSAGE);
+                      lf.dispose();
+                      koordinator.Koordinator.getInstance().otvoriGlavnuFormu();
                  }
                          
             }

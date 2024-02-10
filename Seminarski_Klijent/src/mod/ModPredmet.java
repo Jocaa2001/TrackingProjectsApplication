@@ -2,16 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Enum.java to edit this template
  */
-package communication;
-
-import java.io.Serializable;
+package mod;
 
 /**
  *
  * @author Win 10
  */
-public enum Operacija implements Serializable {
+public enum ModPredmet {
     
-     login, validate, ucitaj_studente, ucitaj_predmete, obrisi_predmet, dodaj_studenta
+    obrisi, pronadji
     
 }

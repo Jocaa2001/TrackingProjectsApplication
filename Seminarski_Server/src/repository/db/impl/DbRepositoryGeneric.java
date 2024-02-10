@@ -38,8 +38,8 @@ public class DbRepositoryGeneric implements DbRepository<ApstraktniDomenskiObjek
 
     @Override
     public void dodaj(ApstraktniDomenskiObjekat param) throws Exception {
-        String upit = "insert into " +param.vratiNazivTabele()+" ("+param.vratiKoloneZaUbacivanje()+") Values (" + param.vratiVrednostiZaUbacivanje() +")";
-        System.out.println(upit);
+        String upit = "insert into " +param.vratiNazivTabele()+" ("+param.vratiKoloneZaUbacivanje()+") values " + param.vratiVrednostiZaUbacivanje();
+        System.out.println(upit + "OVO GLEDSAASSS");
         Statement st = DBConnectionFactory.getinstance().getConnection().createStatement();
         st.executeUpdate(upit);
         st.close();
@@ -57,6 +57,9 @@ public class DbRepositoryGeneric implements DbRepository<ApstraktniDomenskiObjek
     @Override
     public void izbrisi(ApstraktniDomenskiObjekat param) throws Exception {
         String upit = "delete from " + param.vratiNazivTabele() + " where " + param.vratiPrimarniKljuc();
+        Statement st = DBConnectionFactory.getinstance().getConnection().createStatement();
+        st.executeUpdate(upit);
+        st.close();
     }
 
     @Override

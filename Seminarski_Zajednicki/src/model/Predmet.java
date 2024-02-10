@@ -63,7 +63,7 @@ public class Predmet implements ApstraktniDomenskiObjekat {
 
     @Override
     public String toString() {
-        return naziv ;
+        return naziv + " " + espb + " " + idpredmet ;
     }
 
     @Override
@@ -75,13 +75,14 @@ public class Predmet implements ApstraktniDomenskiObjekat {
     public List<ApstraktniDomenskiObjekat> vratiListu(ResultSet rs) throws Exception {
         List<ApstraktniDomenskiObjekat> lista = new ArrayList<>();
         while(rs.next()){
-            int id = rs.getInt("IDpredmet");
-            int esb = rs.getInt("espb");
+            int id = rs.getInt("predmet.IDpredmet");
+            int espbpoeni = rs.getInt("predmet.espb");
+            
             String naziv = rs.getString("naziv");
             int o = rs.getInt("obavezan");
             boolean obavezan = o == 1 ? true:false;
             
-            Predmet p = new Predmet(idpredmet, espb, naziv, obavezan);
+            Predmet p = new Predmet(id, espbpoeni, naziv, obavezan);
             
             lista.add(p);
         }
