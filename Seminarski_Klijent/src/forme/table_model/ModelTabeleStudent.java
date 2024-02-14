@@ -5,6 +5,7 @@
 package forme.table_model;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.swing.table.AbstractTableModel;
 import model.Student;
 
@@ -18,6 +19,10 @@ public class ModelTabeleStudent extends AbstractTableModel {
 
     public ModelTabeleStudent(List<Student> lista) {
         this.lista = lista;
+    }
+
+    public List<Student> getLista() {
+        return lista;
     }
     
     
@@ -50,6 +55,17 @@ public class ModelTabeleStudent extends AbstractTableModel {
     @Override
     public String getColumnName(int column) {
         return kolone[column];
+    }
+
+    public void pretrazi(int brojIndeksa, String ime, String prezime) {
+        List<Student> filtriranaLista = lista.stream()
+                .filter(student -> brojIndeksa == 0 || student.getBrojindeksa()== brojIndeksa) 
+                .filter(student -> ime == null || ime.isEmpty() || student.getIme().toLowerCase().contains(ime.toLowerCase())) // Filtriranje po imenu
+                .filter(student -> prezime == null || prezime.isEmpty() || student.getPrezime().toLowerCase().contains(prezime.toLowerCase())) // Filtriranje po prezimenu
+                .collect(Collectors.toList());
+        
+        this.lista = filtriranaLista;
+        fireTableDataChanged();
     }
     
     

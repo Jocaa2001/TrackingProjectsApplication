@@ -3,9 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package forme;
-import controller.klijent.ControllerLogin;
-import controller.Server.ControllerServer;
+import controllers.ControllerKlijent;
+import controllers.ControllerServer;
+import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import server.Server;
 /**
  *
@@ -142,7 +148,7 @@ public class ServerskaForma extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabelProfesor))
                         .addGap(31, 31, 31))
@@ -182,11 +188,11 @@ public class ServerskaForma extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonServerActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        controller.Server.ControllerServer.getInstance().otvoriLoginFormu();
+        controllers.ControllerServer.getInstance().otvoriLoginFormu();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButtonDodajProfesoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDodajProfesoraActionPerformed
-       // ControllerServer.getInstance().addProfesor();
+       controllers.DodajProfesoraController.getInstance();
     }//GEN-LAST:event_jButtonDodajProfesoraActionPerformed
 
     public JLabel getjLabelProfesor() {
@@ -194,21 +200,155 @@ public class ServerskaForma extends javax.swing.JFrame {
     }
 
     public void pripremiFormu(){
-        if(ControllerLogin.ulogovaniAdmin == null){
+        if(ControllerKlijent.ulogovaniAdmin == null){
             jButtonDodajProfesora.setVisible(false);
             jTableIzmene.setVisible(false);
             jMenuBar1.setEnabled(false);
             jMenuBar2.setEnabled(false);
             jButtonServer.setEnabled(false);
+            jMenuItem1.setEnabled(false);
+            jMenuItem2.setEnabled(false);
         }else{
             jButtonDodajProfesora.setVisible(true);
             jTableIzmene.setVisible(true);
             jMenuBar1.setEnabled(true);
             jMenuBar2.setEnabled(true);
             jButtonServer.setEnabled(true);
+            jMenuItem1.setEnabled(true);
+            jMenuItem2.setEnabled(true);
         }
     }
 
+    public boolean isPokrenut() {
+        return pokrenut;
+    }
+
+    public void setPokrenut(boolean pokrenut) {
+        this.pokrenut = pokrenut;
+    }
+
+    public JButton getjButton1() {
+        return jButton1;
+    }
+
+    public void setjButton1(JButton jButton1) {
+        this.jButton1 = jButton1;
+    }
+
+    public JButton getjButtonDodajProfesora() {
+        return jButtonDodajProfesora;
+    }
+
+    public void setjButtonDodajProfesora(JButton jButtonDodajProfesora) {
+        this.jButtonDodajProfesora = jButtonDodajProfesora;
+    }
+
+    public JButton getjButtonServer() {
+        return jButtonServer;
+    }
+
+    public void setjButtonServer(JButton jButtonServer) {
+        this.jButtonServer = jButtonServer;
+    }
+
+    public JLabel getjLabel1() {
+        return jLabel1;
+    }
+
+    public void setjLabel1(JLabel jLabel1) {
+        this.jLabel1 = jLabel1;
+    }
+
+    public JMenu getjMenu1() {
+        return jMenu1;
+    }
+
+    public void setjMenu1(JMenu jMenu1) {
+        this.jMenu1 = jMenu1;
+    }
+
+    public JMenu getjMenu2() {
+        return jMenu2;
+    }
+
+    public void setjMenu2(JMenu jMenu2) {
+        this.jMenu2 = jMenu2;
+    }
+
+    public JMenu getjMenu3() {
+        return jMenu3;
+    }
+
+    public void setjMenu3(JMenu jMenu3) {
+        this.jMenu3 = jMenu3;
+    }
+
+    public JMenu getjMenu4() {
+        return jMenu4;
+    }
+
+    public void setjMenu4(JMenu jMenu4) {
+        this.jMenu4 = jMenu4;
+    }
+
+    public JMenuBar getjMenuBar1() {
+        return jMenuBar1;
+    }
+
+    public void setjMenuBar1(JMenuBar jMenuBar1) {
+        this.jMenuBar1 = jMenuBar1;
+    }
+
+    public JMenuBar getjMenuBar2() {
+        return jMenuBar2;
+    }
+
+    public void setjMenuBar2(JMenuBar jMenuBar2) {
+        this.jMenuBar2 = jMenuBar2;
+    }
+
+    public JMenuItem getjMenuItem1() {
+        return jMenuItem1;
+    }
+
+    public void setjMenuItem1(JMenuItem jMenuItem1) {
+        this.jMenuItem1 = jMenuItem1;
+    }
+
+    public JMenuItem getjMenuItem2() {
+        return jMenuItem2;
+    }
+
+    public void setjMenuItem2(JMenuItem jMenuItem2) {
+        this.jMenuItem2 = jMenuItem2;
+    }
+
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+    public void setjScrollPane1(JScrollPane jScrollPane1) {
+        this.jScrollPane1 = jScrollPane1;
+    }
+
+    public JTable getjTableIzmene() {
+        return jTableIzmene;
+    }
+
+    public void setjTableIzmene(JTable jTableIzmene) {
+        this.jTableIzmene = jTableIzmene;
+    }
+
+    public Server getServer() {
+        return server;
+    }
+
+    public void setServer(Server server) {
+        this.server = server;
+    }
+
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonDodajProfesora;

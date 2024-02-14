@@ -3,12 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package forme;
-import controller.klijent.ControllerLogin;
+import controllers.ControllerKlijent;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import controller.klijent.ControllerLogin;
-import controller.Server.ControllerServer;
+import controllers.ControllerKlijent;
+import controllers.ControllerServer;
 /**
  *
  * @author Win 10
@@ -48,7 +48,11 @@ public class LogInForma extends javax.swing.JFrame {
 
         jLabel1.setText("username");
 
+        jTextFieldUser.setText("S");
+
         jLabel2.setText("password");
+
+        jPasswordField.setText("Seminarski1!");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

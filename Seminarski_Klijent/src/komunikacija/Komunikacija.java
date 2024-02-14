@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Predmet;
 import model.Profesor;
+import model.Projekat;
 import model.Student;
 
 /**
@@ -108,15 +109,21 @@ public class Komunikacija {
         }
     }
 
-    public void dodajStudenta(Student s) {
+    public void saveStudent(Student s) throws Exception {
         Zahtev z = new Zahtev(Operacija.dodaj_studenta,s);
         posiljalac.posalji(z);
         Odgovor odg = (Odgovor) primalac.primi();
-        if(odg.getObject() == null){
-            System.out.println("Uspesno dodat student");
+        System.out.println(odg.getObject()+"na serverskoj stranii");
+         if(odg.getObject() == null){
+          
         }else{
-            System.out.println("Greska, student nije dodat");
-        } 
+            
+            throw new Exception("Систем не може да запамти студента");
+        }
+    }
+
+    public List<Projekat> loadListProjects() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     

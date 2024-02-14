@@ -7,9 +7,11 @@ package controllers;
 import forme.DodajStudentaForma;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import komunikacija.Komunikacija;
 import model.Student;
+import validator.Validator;
 
 /**
  *
@@ -18,6 +20,7 @@ import model.Student;
 public class DodajStudentaController {
     
     private final DodajStudentaForma dsf;
+    private Student student;
 
     public DodajStudentaController(DodajStudentaForma dsf) {
         this.dsf = dsf;
@@ -25,27 +28,22 @@ public class DodajStudentaController {
     }
 
     public void otvoriFormu() {
+        dsf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         dsf.setVisible(true);
     }
 
     private void addActionListeners() {
-        dsf.dodajAddActionListener(new ActionListener() {
+        dsf.ZapamtiAddActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Student s = createStudent();
-                dodaj(e,s);
+                
+                dodaj(e,student);
             }
 
             private void dodaj(ActionEvent e, Student s) {
-                if(s == null){
-                    JOptionPane.showMessageDialog(null, "Систем не може да креира студента");
-                    return;
-                }
-                    JOptionPane.showMessageDialog(null, "Систем је успешно креирао студента");
                 try{
-                Komunikacija.getInstance().dodajStudenta(s);
-                JOptionPane.showMessageDialog(dsf, "Систем је успешно запамтио студента", "Успех", JOptionPane.INFORMATION_MESSAGE);
-                
+                Komunikacija.getInstance().saveStudent(s);
+                JOptionPane.showMessageDialog(dsf, "Систем је запамтио студента", "Успех", JOptionPane.INFORMATION_MESSAGE);
                 dsf.dispose();
                 
                 }catch(Exception exc){
@@ -54,16 +52,32 @@ public class DodajStudentaController {
                 
             }
 
-            private Student createStudent() {
-                 String ime = dsf.getjTextFieldIme().getText().trim();
-                String prezime = dsf.getjTextFieldPrezime().getText().trim();
-                int brInd = Integer.parseInt(dsf.getjTextFieldBrInd().getText());
-                Student s = new Student(-1, ime, prezime, brInd);
-                if(s.getIme() == null || s.getPrezime() == null || s.getIme().isEmpty() || s.getPrezime().isEmpty()|| String.valueOf(s.getBrojindeksa()).length() != 8){
-                    
-                    return null;
+            
+            
+        });
+        dsf.kreirajAddActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                    createStudent();
                 }
-                   return s;
+            private void createStudent() {
+                 String ime = dsf.getjTextFieldIme().getText().trim();
+                 String prezime = dsf.getjTextFieldPrezime().getText().trim();
+                 String brojind = dsf.getjTextFieldBrInd().getText();
+                 if(Validator.validatorImena(ime) && Validator.validatorPrezimena(prezime)&& Validator.validatorBrojIndeksa(brojind)){
+                    
+                 Student s = new Student(-1, ime, prezime, Integer.valueOf(brojind));
+                 student = s;
+                 
+                 }else
+                 student = null;
+                 
+                 System.out.println("ovo je student" + student);
+                 if(student == null){
+                    JOptionPane.showMessageDialog(null, "Систем не може да креира студента");
+                    
+                }else
+                    JOptionPane.showMessageDialog(null, "Систем је успешно креирао студента");
             }
             
         });

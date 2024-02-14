@@ -8,7 +8,7 @@ import communication.Odgovor;
 import communication.Posiljalac;
 import communication.Primalac;
 import communication.Zahtev;
-import controller.klijent.ControllerLogin;
+import controllers.ControllerKlijent;
 import java.net.Socket;
 import java.util.List;
 import java.util.logging.Level;
@@ -44,36 +44,41 @@ public class ObradaKlijentskihZahteva extends Thread {
                 switch (zahtev.getOperation()) {
                     case login:
                         Profesor p = (Profesor) zahtev.getObject();
-                        p = ControllerLogin.getInstance().login(p);
+                        p = ControllerKlijent.getInstance().login(p);
                         odgovor.setObject(p);
                         break;
                     case validate: 
                         String pass = (String) zahtev.getObject();
-                        boolean ispravan = ControllerLogin.getInstance().validacija(pass);
+                        boolean ispravan = ControllerKlijent.getInstance().validacija(pass);
                         odgovor.setObject(ispravan);
                         break;
                     case ucitaj_studente:
-                        List<Student> studenti = ControllerLogin.getInstance().ucitajStudente();
+                        List<Student> studenti = ControllerKlijent.getInstance().ucitajStudente();
                         odgovor.setObject(studenti);
                         break;
                     case ucitaj_predmete:
-                        List<Predmet> predmeti = ControllerLogin.getInstance().ucitajPredmete();
+                        List<Predmet> predmeti = ControllerKlijent.getInstance().ucitajPredmete();
                         odgovor.setObject(predmeti);
                         break;
                     case obrisi_predmet:
                         try{
                             Predmet pred = (Predmet) zahtev.getObject();
                             
-                            ControllerLogin.getInstance().obrisiPredmet(pred);
+                            ControllerKlijent.getInstance().obrisiPredmet(pred);
                             odgovor.setObject(null);
                         }catch(Exception e){
                             odgovor.setObject(e);
                         }
                         break;
                     case dodaj_studenta:
+                        try{
                         Student s = (Student) zahtev.getObject();
-                        ControllerLogin.getInstance().dodajStudenta(s);
+                        ControllerKlijent.getInstance().saveStudent(s);
                         odgovor.setObject(null);
+                            System.out.println(odgovor.getObject()+"u ovome");
+                        }catch(Exception e){
+                            odgovor.setObject(e);
+                        }
                         break;
                     default:
                         System.out.println("Greska");

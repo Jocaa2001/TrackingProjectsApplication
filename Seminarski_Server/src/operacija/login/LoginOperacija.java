@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 import model.ApstraktniDomenskiObjekat;
 import model.Profesor;
 import operacija.ApstraktnaGenerickaOperacija;
-import validator.LoginValidatorPassword;
+import validator.Validator;
 
 /**
  *
@@ -36,8 +36,7 @@ public class LoginOperacija extends ApstraktnaGenerickaOperacija {
         
         for (Profesor p : sviProfesori) {
              System.out.println(p.getPassword());
-            if(p.equals((Profesor)objekat)){
-               
+            if(p.equals((Profesor)objekat)){ 
                 prof = p;
                 return;
             }

@@ -5,6 +5,7 @@
 package forme.table_model;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.swing.table.AbstractTableModel;
 import model.Predmet;
 import model.Student;
@@ -45,8 +46,6 @@ public class ModelTabelePredmet extends AbstractTableModel {
             case 1: return p.getEspb();
             case 2: return p.getNaziv();
             case 3: return p.isObavezan();
-                
-                
             default:
                 return "n/a";
         }
@@ -55,6 +54,28 @@ public class ModelTabelePredmet extends AbstractTableModel {
     @Override
     public String getColumnName(int column) {
         return kolone[column];
+    }
+
+    public void pretrazi(int espb, String naziv, boolean obavezan) {
+         List<Predmet> filtriranaLista = lista.stream()
+                .filter(predmet -> espb == 0 || predmet.getEspb() == espb)
+                .filter(predmet -> naziv == null || naziv.isEmpty() || predmet.getNaziv().toLowerCase().contains(naziv.toLowerCase()))
+                .filter(predmet -> predmet.isObavezan() == obavezan)
+                .collect(Collectors.toList());
+        this.lista = filtriranaLista;
+        fireTableDataChanged();
+        
+    }
+        
+    public void pretraziNoBool(int espb, String naziv) {
+         List<Predmet> filtriranaLista = lista.stream()
+                .filter(predmet -> espb == 0 || predmet.getEspb() == espb)
+                .filter(predmet -> naziv == null || naziv.isEmpty() || predmet.getNaziv().toLowerCase().contains(naziv.toLowerCase()))
+                
+                .collect(Collectors.toList());
+        this.lista = filtriranaLista;
+        fireTableDataChanged();
+         
     }
     
     

@@ -2,10 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package controller.Server;
+package controllers;
 
-import controller.klijent.ControllerLogin;
-import static controller.klijent.ControllerLogin.ulogovaniAdmin;
+import controllers.ControllerKlijent;
+import static controllers.ControllerKlijent.ulogovaniAdmin;
+import forme.DodajProfesoraForma;
 import forme.LogInForma;
 import forme.ServerskaForma;
 import hashing.PasswordHasher;
@@ -24,6 +25,7 @@ public class ControllerServer {
     private static ControllerServer instance;
     private LogInForma lif;
     private ServerskaForma sf;
+   
     
     private ControllerServer() {
         sf = new ServerskaForma();
@@ -53,7 +55,7 @@ public class ControllerServer {
         LoginOperacija lo = new LoginOperacija();
         lo.izvrsi(p, null);
         p = lo.getProf();
-            System.out.println(p);
+        
         if(p != null){
             JOptionPane.showMessageDialog(null, "Успешно сте се пријавили на систем");
             ulogovaniAdmin = p;
@@ -63,10 +65,30 @@ public class ControllerServer {
             
             }
         } catch (Exception ex) {
-            Logger.getLogger(ControllerLogin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControllerKlijent.class.getName()).log(Level.SEVERE, null, ex);
         }
         setLoggedIn();
         sf.pripremiFormu();
+    }
+    
+    public void pripremiFormu(){
+        if(ControllerKlijent.ulogovaniAdmin == null){
+            sf.getjButtonDodajProfesora().setVisible(false);
+            sf.getjTableIzmene().setVisible(false);
+            sf.getJMenuBar().setEnabled(false);
+            sf.getjMenuBar1().setEnabled(false);
+            sf.getjButtonServer().setEnabled(false);
+            sf.getjMenuItem1().setEnabled(false);
+            sf.getjMenuItem2().setEnabled(false);
+        }else{
+            sf.getjButtonDodajProfesora().setVisible(true);
+            sf.getjTableIzmene().setVisible(true);
+            sf.getJMenuBar().setEnabled(true);
+            sf.getjMenuBar1().setEnabled(true);
+            sf.getjButtonServer().setEnabled(true);
+            sf.getjMenuItem1().setEnabled(true);
+            sf.getjMenuItem2().setEnabled(true);
+        }
     }
     
    public void setLoggedIn(){
@@ -77,6 +99,8 @@ public class ControllerServer {
         lif = new LogInForma();
         lif.setVisible(true);
     }
+
+   
 
    
    

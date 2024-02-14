@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package controller.klijent;
+package controllers;
 
 import forme.LogInForma;
 import forme.ServerskaForma;
@@ -21,26 +21,26 @@ import operacija.student.DodajStudentaOperacija;
 import operacija.student.UcitajStudenteOperacija;
 import repository.db.DBConnectionFactory;
 import repository.db.impl.DbRepositoryGeneric;
-import validator.LoginValidatorPassword;
+import validator.Validator;
 
 /**
  *
  * @author Win 10
  */
-public class ControllerLogin {
-    private static ControllerLogin instance;
+public class ControllerKlijent {
+    private static ControllerKlijent instance;
 
     public static Profesor ulogovaniAdmin;
     private DbRepositoryGeneric dbr;
    
     
-    private ControllerLogin() {
+    private ControllerKlijent() {
         
     }
 
-    public static ControllerLogin getInstance() {
+    public static ControllerKlijent getInstance() {
         if(instance == null)
-            instance = new ControllerLogin();
+            instance = new ControllerKlijent();
         return instance;
     }
 
@@ -53,7 +53,7 @@ public class ControllerLogin {
     }
 
     public boolean validacija(String pass) {
-        return new LoginValidatorPassword(pass).Validacija();
+        return new Validator().validatorPassworda(pass);
     }
 
     public List<Student> ucitajStudente() throws Exception {
@@ -77,7 +77,8 @@ public class ControllerLogin {
         
     }
 
-    public void dodajStudenta(Student s) throws Exception {
+    public void saveStudent(Student s) throws Exception {
+        
         DodajStudentaOperacija dso = new DodajStudentaOperacija();
         dso.izvrsi(s, null);
     }

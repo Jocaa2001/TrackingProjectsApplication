@@ -33,7 +33,7 @@ public class PasswordHasher {
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(PasswordHasher.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println(hexString + "ovo je iz hasha");
+        
        return hexString.toString();
     }
 }

@@ -8,6 +8,7 @@ import com.sun.xml.internal.bind.v2.runtime.Coordinator;
 import forme.GlavnaForma;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import koordinator.Koordinator;
 import model.Profesor;
@@ -23,6 +24,7 @@ public class GlavnaFormaController {
 
     public GlavnaFormaController(GlavnaForma gf) {
         this.gf = gf;
+        gf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         addActionListeners();
     }
 

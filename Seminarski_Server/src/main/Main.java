@@ -4,8 +4,8 @@
  */
 package main;
 
-import controller.klijent.ControllerLogin;
-import controller.Server.ControllerServer;
+import controllers.ControllerKlijent;
+import controllers.ControllerServer;
 import forme.ServerskaForma;
 
 /**

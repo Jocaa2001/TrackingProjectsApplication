@@ -29,6 +29,7 @@ public class Koordinator {
     private PrikazStudenataController psc;
     private DodajStudentaController dsc;
     private Profesor ulogovani;
+    
     private Koordinator() {
         
     }
@@ -64,9 +65,7 @@ public static Koordinator getInstance() {
 
     public void otvoriPrikazPredmetaFormu(ModPredmet m) {
         ppc = new PrikazPredmetaController(new PrikazPredmetaForma());
-        if(m.equals(m.pronadji))
-            ppc.sakrijDugmeObrisi();
-        ppc.otvoriFormu();
+        ppc.otvoriFormu(m);
     }
 
     public void otvoriDodajStudentaFormu() {

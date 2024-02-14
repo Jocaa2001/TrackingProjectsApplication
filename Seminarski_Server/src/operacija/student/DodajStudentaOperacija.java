@@ -15,18 +15,16 @@ public class DodajStudentaOperacija extends ApstraktnaGenerickaOperacija {
 
     @Override
     protected void preduslovi(Object objekat) throws Exception {
+        
         if(objekat == null || !(objekat instanceof Student)){
-            throw new Exception("Систем не може да креира студента");
-        }
-        Student s = (Student) objekat;
-        if(s.getIme() == null || s.getPrezime() == null || s.getIme().isEmpty() || s.getPrezime().isEmpty()|| String.valueOf(s.getBrojindeksa()).length() != 8){
-             throw new Exception("Грешка, неисправан унос");
+            throw new Exception("Систем не може да запамти студента");
         }
     }
 
     @Override
     protected void izvrsiOperaciju(Object objekat, String kljuc) throws Exception {
         broker.dodaj((Student) objekat);
+        
     }
     
 }
